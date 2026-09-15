@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: #172936;
+  --color-olive: #66704a;
+  --color-cream: #f4f0e8;
+  --color-charcoal: #2b302f;
+  --color-red: #a14e42;
+  --font-sans: 'Arial', 'Helvetica Neue', sans-serif;
+  --font-display: 'Arial', 'Helvetica Neue', sans-serif;
+  --radius-sm: 0.15rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.4rem;
+  --radius-xl: 0.6rem;
+}
+
+:root {
+  color-scheme: light;
+  --background: #f4f0e8;
+  --foreground: #2b302f;
+  --card: #faf8f3;
+  --card-foreground: #2b302f;
+  --popover: #faf8f3;
+  --popover-foreground: #2b302f;
+  --primary: #172936;
+  --primary-foreground: #f4f0e8;
+  --secondary: #e8e3d8;
+  --secondary-foreground: #172936;
+  --muted: #e8e3d8;
+  --muted-foreground: #626761;
+  --accent: #e8e3d8;
+  --accent-foreground: #172936;
+  --destructive: #a14e42;
+  --border: rgba(23, 41, 54, 0.14);
+  --input: rgba(23, 41, 54, 0.2);
+  --ring: #66704a;
+  --radius: 0.25rem;
+}
+
+* { @apply border-border; }
+html { scroll-behavior: smooth; }
+body { @apply bg-background text-foreground; font-family: var(--font-sans); }
+::selection { background: #66704a; color: #f4f0e8; }
+
+@layer utilities {
+  .eyebrow { @apply text-[10px] font-bold uppercase tracking-[0.2em]; }
+  .field-label { @apply flex flex-col gap-2 text-xs font-bold uppercase tracking-[0.13em] text-navy; }
+  .field-control { @apply w-full rounded-sm border border-navy/20 bg-cream px-3 py-3 text-sm font-normal normal-case tracking-normal text-charcoal outline-none transition-colors placeholder:text-charcoal/35 focus:border-olive focus:ring-2 focus:ring-olive/20; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

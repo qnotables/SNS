@@ -1,0 +1,14 @@
+import type { Metadata } from 'next'
+import { ButtonLink, Callout, Container, PageHero, SectionHeading } from '@/components/site-sections'
+
+export const metadata: Metadata = { title: 'Our Story' }
+
+export default function StoryPage() {
+  return <>
+    <PageHero eyebrow="Our story" title="Built from service. Shaped by transition." description="Shepherds Not Sheep began with a simple recognition: the transition from military service into civilian life can ask a great deal of a veteran." />
+    <section className="bg-cream py-20 sm:py-28"><Container><div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24"><div><SectionHeading eyebrow="A founder perspective" title="A practical response to a real need." /></div><div className="max-w-2xl text-lg leading-8 text-charcoal/75"><p>Shepherds Not Sheep was founded by U.S. Army veteran Sergeant Michael Thielmeier after recognizing many of the challenges veterans can face when transitioning from military service into civilian life.</p><p className="mt-6">The organization is intended to combine professional partnerships with practical, hands-on education and mentorship.</p><p className="mt-6">We do not believe a veteran&apos;s hardest season should become their permanent identity. The work ahead is to create a stable environment where experience, resilience, and potential can be seen clearly.</p></div></div></Container></section>
+    <section className="border-y border-navy/10 bg-[#ebe6dc] py-20 sm:py-28"><Container><div className="mx-auto max-w-4xl text-center"><p className="eyebrow text-olive">The long-term goal</p><p className="mt-7 text-3xl font-medium leading-tight tracking-[-0.035em] text-navy sm:text-5xl">Bring veterans and the people, organizations, and opportunities around them together around a common mission.</p></div></Container></section>
+    <section className="bg-cream py-20 sm:py-28"><Container><div className="grid gap-8 md:grid-cols-3"><div className="border-t border-navy/20 pt-5"><p className="eyebrow">01 / Stability</p><p className="mt-4 text-sm leading-7 text-charcoal/65">Start with the basics and create room for the next decision.</p></div><div className="border-t border-navy/20 pt-5"><p className="eyebrow">02 / Skills</p><p className="mt-4 text-sm leading-7 text-charcoal/65">Pair mentorship with useful, practical opportunities to learn.</p></div><div className="border-t border-navy/20 pt-5"><p className="eyebrow">03 / Independence</p><p className="mt-4 text-sm leading-7 text-charcoal/65">Keep the destination in view: purpose, responsibility, and a future of one&apos;s own.</p></div></div></Container></section>
+    <Callout eyebrow="Be part of the foundation" title="The next chapter is a shared effort." description="There is room for veterans, volunteers, educators, skilled tradespeople, businesses, and community partners in this work." href="/get-involved" label="Get involved" />
+  </>
+}
