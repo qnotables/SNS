@@ -66,7 +66,7 @@ export function FounderPhotoFrame() {
 
 const futurePrograms = [
   { title: 'Woodworking', image: '/images/sns-craftsmanship.png', alt: 'Hands shaping wood on a workshop bench' },
-  { title: 'Sustainable agriculture', image: '/images/sns-agriculture.png', alt: 'A veteran and mentor walking through a community garden' },
+  { title: 'Farmers markets', image: '/images/sns-agriculture.png', alt: 'A veteran and mentor walking through a community garden' },
   { title: 'CNC-produced goods', image: '/images/sns-cnc.png', alt: 'A craftsman working beside a compact CNC machine' },
   { title: 'Community projects', image: '/images/sns-community.png', alt: 'Veterans and mentors gathered around a workshop table' },
   { title: 'Online marketplaces', image: '/images/sns-commerce.png', alt: 'Hands preparing a handmade order for shipment' },
