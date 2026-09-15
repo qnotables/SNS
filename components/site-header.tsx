@@ -23,8 +23,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
-        <Link href="/" className="group flex max-w-[220px] items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-navy text-xs font-bold tracking-[0.18em] text-cream" aria-hidden="true">SNS</span>
+        <Link href="/" className="group flex max-w-[250px] items-center gap-3" onClick={() => setOpen(false)}>
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SNS-1nJ7MWG1tU3Y5TqgHYjjUqntL0zXph.png" alt="Shepherds Not Sheep logo" className="size-14 shrink-0 object-contain" />
           <span className="leading-tight">
             <span className="block text-sm font-bold uppercase tracking-[0.16em] text-navy">Shepherds Not Sheep</span>
             <span className="hidden text-[10px] uppercase tracking-[0.18em] text-charcoal/65 sm:block">Retreat &amp; Reestablishment Community</span>
