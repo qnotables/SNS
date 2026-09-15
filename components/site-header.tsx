@@ -41,14 +41,14 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <Button render={<a href="/veteran-assistance" />} nativeButton={false} className="hidden bg-red text-cream hover:bg-red/90 sm:inline-flex" size="lg">Get Help</Button>
-          <Button variant="outline" size="icon" className="border-navy/20 text-navy 2xl:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((current) => !current)}>
+          <Button type="button" variant="outline" size="icon" className="border-navy/20 text-navy 2xl:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((current) => !current)}>
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </Button>
         </div>
       </div>
 
       {open && (
-        <div id="mobile-navigation" className="border-t border-navy/10 bg-cream px-5 py-5 sm:px-8 2xl:hidden">
+        <div id="mobile-navigation" className="absolute inset-x-0 top-full z-50 max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-navy/10 bg-cream px-5 py-5 shadow-[0_18px_36px_rgba(23,41,54,0.12)] sm:px-8 2xl:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1" aria-label="Mobile navigation">
             {navigation.map((item) => (
               <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="border-b border-navy/10 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-navy last:border-0">
