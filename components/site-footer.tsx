@@ -19,9 +19,8 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr_1fr]">
           <div>
-            <div className="mb-6 flex items-center gap-3">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SNS-1nJ7MWG1tU3Y5TqgHYjjUqntL0zXph.png" alt="Shepherds Not Sheep logo" className="size-16 shrink-0 object-contain" />
-              <span className="text-sm font-bold uppercase tracking-[0.16em]">Shepherds Not Sheep</span>
+            <div className="mb-6 flex items-center">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JD2XTTD9lDUmnuvg0icr2fACLHUxFg.png" alt="Shepherds Not Sheep" className="h-20 w-64 shrink-0 object-cover object-center" />
             </div>
             <p className="max-w-sm text-xl font-medium leading-relaxed text-cream/90">Retreat and Reestablishment Community for Veterans</p>
             <p className="mt-6 max-w-sm text-sm leading-7 text-cream/60">Serving those who served. Building a path forward.</p>

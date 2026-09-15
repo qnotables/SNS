@@ -23,12 +23,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
-        <Link href="/" className="group flex min-w-0 shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <img src="/images/sns-logo.png" alt="Shepherds Not Sheep logo" className="size-14 shrink-0 object-contain" />
-          <span className="min-w-0 leading-tight">
-            <span className="block whitespace-nowrap text-sm font-bold uppercase tracking-[0.16em] text-navy">Shepherds Not Sheep</span>
-            <span className="hidden whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-charcoal/65 sm:block">Retreat &amp; Reestablishment Community</span>
-          </span>
+        <Link href="/" className="group flex min-w-0 shrink-0 items-center" onClick={() => setOpen(false)}>
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JD2XTTD9lDUmnuvg0icr2fACLHUxFg.png" alt="Shepherds Not Sheep" className="h-16 w-56 shrink-0 object-cover object-center sm:h-[4.5rem] sm:w-72" />
         </Link>
 
         <nav className="hidden items-center gap-5 2xl:flex" aria-label="Main navigation">
