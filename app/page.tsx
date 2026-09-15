@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
 import { ButtonLink, Callout, Container, Eyebrow, FounderPhotoFrame, FutureProgramTiles, PhotoBand, PillarCard, ProcessSteps, SectionHeading, pillars } from '@/components/site-sections'
 
+export const dynamic = 'force-dynamic'
+
 export default function Home() {
   return <>
     <section className="relative overflow-hidden bg-navy text-cream">
