@@ -20,7 +20,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr_1fr]">
           <div>
             <div className="mb-6 flex items-center">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JD2XTTD9lDUmnuvg0icr2fACLHUxFg.png" alt="Shepherds Not Sheep" className="h-20 w-64 shrink-0 object-cover object-center" />
+              <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="h-20 w-64 shrink-0 object-contain object-center" />
             </div>
             <p className="max-w-sm text-xl font-medium leading-relaxed text-cream/90">Retreat and Reestablishment Community for Veterans</p>
             <p className="mt-6 max-w-sm text-sm leading-7 text-cream/60">Serving those who served. Building a path forward.</p>

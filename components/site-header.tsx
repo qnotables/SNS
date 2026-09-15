@@ -24,7 +24,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Link href="/" className="group flex min-w-0 shrink-0 items-center" onClick={() => setOpen(false)}>
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JD2XTTD9lDUmnuvg0icr2fACLHUxFg.png" alt="Shepherds Not Sheep" className="h-16 w-56 shrink-0 object-cover object-center sm:h-[4.5rem] sm:w-72" />
+          <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="h-16 w-56 shrink-0 object-contain object-center sm:h-[4.5rem] sm:w-72" />
         </Link>
 
         <nav className="hidden items-center gap-5 2xl:flex" aria-label="Main navigation">
