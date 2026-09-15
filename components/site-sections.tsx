@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
-import { ArrowRight, Check, CircleDashed } from 'lucide-react'
+import { ArrowRight, BriefcaseBusiness, Camera, GraduationCap, Home, Scale, UsersRound, Wrench } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function Container({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -43,21 +43,38 @@ export function Callout({ eyebrow, title, description, href, label, dark = true 
 }
 
 export const pillars: { title: string; description: string; icon: LucideIcon }[] = [
-  { title: 'Stability', description: 'Housing, food, transportation, basic necessities, and a stable environment where veterans can begin rebuilding.', icon: Check },
-  { title: 'Veteran Advocacy', description: 'Helping veterans identify and navigate VA benefits, government programs, nonprofit resources, and community services.', icon: CircleDashed },
-  { title: 'Education & Employment', description: 'College opportunities, certifications, vocational training, technology skills, resume assistance, job preparation, and career development.', icon: ArrowRight },
-  { title: 'Entrepreneurship', description: 'Business education, financial literacy, sales, online commerce, mentorship, and small-business development.', icon: Check },
-  { title: 'Skills & Self-Sufficiency', description: 'Hands-on opportunities involving woodworking, CNC operation, construction, gardening, sustainable agriculture, property maintenance, animal husbandry, and practical life skills.', icon: CircleDashed },
-  { title: 'Community & Purpose', description: 'Veteran mentorship, peer support, community projects, recreation, volunteering, and opportunities to rebuild a sense of mission and belonging.', icon: ArrowRight },
+  { title: 'Stability', description: 'Housing, food, transportation, basic necessities, and a stable environment where veterans can begin rebuilding.', icon: Home },
+  { title: 'Veteran Advocacy', description: 'Helping veterans identify and navigate VA benefits, government programs, nonprofit resources, and community services.', icon: Scale },
+  { title: 'Education & Employment', description: 'College opportunities, certifications, vocational training, technology skills, resume assistance, job preparation, and career development.', icon: GraduationCap },
+  { title: 'Entrepreneurship', description: 'Business education, financial literacy, sales, online commerce, mentorship, and small-business development.', icon: BriefcaseBusiness },
+  { title: 'Skills & Self-Sufficiency', description: 'Hands-on opportunities involving woodworking, CNC operation, construction, gardening, sustainable agriculture, property maintenance, animal husbandry, and practical life skills.', icon: Wrench },
+  { title: 'Community & Purpose', description: 'Veteran mentorship, peer support, community projects, recreation, volunteering, and opportunities to rebuild a sense of mission and belonging.', icon: UsersRound },
 ]
 
 export function PillarCard({ title, description, icon: Icon }: { title: string; description: string; icon: LucideIcon }) {
-  return <article className="group flex min-h-[245px] flex-col justify-between border border-navy/15 bg-cream p-6 transition-colors hover:border-olive/50 hover:bg-[#faf8f3] sm:p-7"><div className="flex items-start justify-between gap-5"><span className="flex size-11 items-center justify-center rounded-full border border-olive/25 bg-olive/10 text-olive"><Icon aria-hidden="true" /></span><span className="eyebrow text-charcoal/35">Planned</span></div><div><h3 className="mt-10 text-2xl font-semibold text-navy">{title}</h3><p className="mt-3 text-sm leading-7 text-charcoal/65">{description}</p></div></article>
+  return <article className="group flex min-h-[265px] flex-col justify-between border border-navy/15 bg-cream p-6 transition-colors hover:border-olive/50 hover:bg-[#faf8f3] sm:p-7"><div className="flex items-start justify-between gap-5"><span className="flex size-12 items-center justify-center rounded-full border border-olive/30 bg-olive/10 text-olive"><Icon aria-hidden="true" /></span><span className="eyebrow text-charcoal/35">Planned</span></div><div><h3 className="mt-10 text-2xl font-semibold text-navy">{title}</h3><p className="mt-3 text-sm leading-7 text-charcoal/65">{description}</p></div></article>
 }
 
 export function ProcessSteps() {
   const steps = [['01', 'Reach Out', 'A veteran contacts Shepherds Not Sheep or is referred by a partner organization.'], ['02', 'Stabilize', 'Immediate needs such as food, shelter, benefits, transportation, and other essential resources are evaluated.'], ['03', 'Build a Plan', 'The veteran works with mentors and professionals to create an individualized reestablishment plan based on their needs, abilities, interests, and goals.'], ['04', 'Move Forward', 'The veteran develops the skills, resources, employment, education, business opportunities, and support network needed to establish greater independence.']]
-  return <div className="relative grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:before:absolute lg:before:left-[12.5%] lg:before:right-[12.5%] lg:before:top-5 lg:before:h-px lg:before:bg-navy/15">{steps.map(([number, title, description]) => <article key={number} className="relative z-10 border-l border-navy/20 pl-5 lg:border-l-0 lg:px-6 lg:pt-12 lg:text-center"><span className="mx-0 flex size-10 items-center justify-center rounded-full border border-red bg-cream font-mono text-xs font-bold text-red lg:absolute lg:left-1/2 lg:top-0 lg:-translate-x-1/2">{number}</span><h3 className="mt-4 text-xl font-semibold text-navy lg:mt-5">{title}</h3><p className="mt-3 text-sm leading-7 text-charcoal/65">{description}</p></article>)}</div>
+  return <div className="relative grid gap-9 before:absolute before:bottom-8 before:left-5 before:top-5 before:w-px before:bg-navy/15 md:grid-cols-2 md:before:hidden lg:grid-cols-4 lg:gap-0 lg:before:bottom-auto lg:before:left-[12.5%] lg:before:right-[12.5%] lg:before:top-5 lg:before:h-px lg:before:w-auto">{steps.map(([number, title, description]) => <article key={number} className="relative z-10 pl-14 md:border-l md:border-navy/15 md:pl-5 lg:border-l-0 lg:px-6 lg:pt-12 lg:text-center"><span className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-full border border-red bg-cream font-mono text-xs font-bold text-red md:left-[-21px] lg:left-1/2 lg:top-0 lg:-translate-x-1/2">{number}</span><h3 className="text-xl font-semibold text-navy lg:mt-5">{title}</h3><p className="mt-3 text-sm leading-7 text-charcoal/65">{description}</p></article>)}</div>
+}
+
+export function FounderPhotoFrame() {
+  return <figure className="relative min-h-[360px] overflow-hidden border border-navy/15 bg-navy p-7 text-cream sm:min-h-[470px]"><div className="absolute inset-5 border border-cream/20" /><div className="relative flex h-full min-h-[300px] flex-col justify-between"><div className="flex size-14 items-center justify-center rounded-full border border-cream/25 bg-cream/10 text-cream/70"><Camera aria-hidden="true" /></div><figcaption><p className="eyebrow text-cream/50">Founder portrait</p><p className="mt-3 max-w-xs font-display text-2xl leading-tight text-cream/85">A professional portrait will be added here as the organization develops.</p></figcaption></div></figure>
+}
+
+const futurePrograms = [
+  { title: 'Woodworking', image: '/images/sns-craftsmanship.png', alt: 'Hands shaping wood on a workshop bench' },
+  { title: 'Sustainable agriculture', image: '/images/sns-agriculture.png', alt: 'A veteran and mentor walking through a community garden' },
+  { title: 'CNC-produced goods', image: '/images/sns-cnc.png', alt: 'A craftsman working beside a compact CNC machine' },
+  { title: 'Community projects', image: '/images/sns-community.png', alt: 'Veterans and mentors gathered around a workshop table' },
+  { title: 'Online marketplaces', image: '/images/sns-commerce.png', alt: 'Hands preparing a handmade order for shipment' },
+  { title: 'Veteran-developed businesses', image: '/images/sns-entrepreneurship.png', alt: 'Two adults reviewing a business plan across a workshop table' },
+]
+
+export function FutureProgramTiles() {
+  return <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{futurePrograms.map((program) => <article key={program.title} className="group relative min-h-[230px] overflow-hidden bg-charcoal"><Image src={program.image} alt={program.alt} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover opacity-80 transition-transform duration-500 group-hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/20 to-transparent" /><div className="relative flex min-h-[230px] items-end p-5"><h3 className="max-w-[14rem] text-2xl font-semibold leading-tight text-cream">{program.title}</h3></div></article>)}</div>
 }
 
 export function StatusRow({ title, status, description }: { title: string; status: string; description: string }) {
