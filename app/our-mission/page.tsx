@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
-import { ButtonLink, Callout, Container, SectionHeading } from '@/components/site-sections'
+import { ButtonLink, Callout, Container, PageHero, PhotoBand, SectionHeading } from '@/components/site-sections'
 
 export const metadata: Metadata = { title: 'Our Mission' }
 
 export default function MissionPage() {
   return <>
-    <PageHero />
+    <PageHero eyebrow="Why we exist" title="A community for the next chapter." description="Our mission begins with immediate needs and continues toward lasting independence, purpose, and belonging." accent="navy" image="/images/sns-community.png" />
     <section className="bg-cream py-20 sm:py-28"><Container><div className="grid gap-12 lg:grid-cols-2 lg:gap-24"><div><SectionHeading eyebrow="Mission" title="A foundation for an independent future." /></div><div className="text-lg leading-8 text-charcoal/75"><p>Shepherds Not Sheep is dedicated to helping homeless and distressed veterans rebuild stable, independent, and purposeful lives.</p><p className="mt-6">We seek to provide a secure and supportive community where veterans have access to shelter, food, education, mentorship, entrepreneurship opportunities, vocational training, and assistance navigating veteran benefits and community resources.</p><p className="mt-6">Our mission extends beyond meeting immediate needs. We aim to provide veterans with the foundation, skills, confidence, and support necessary to overcome challenges, rediscover purpose, and build a self-sufficient future.</p></div></div></Container></section>
+    <PhotoBand src="/images/sns-craftsmanship.png" alt="Hands measuring a piece of wood on a workbench" eyebrow="Mission in practice" title="Dignity is practical." description="A secure environment, useful work, steady mentorship, and honest partnership can give a veteran room to make the next decision with confidence." />
     <section className="bg-olive py-20 text-cream sm:py-28"><Container><div className="max-w-4xl"><SectionHeading light eyebrow="Vision" title="No veteran left without a path forward." /><p className="mt-8 max-w-2xl text-lg leading-8 text-cream/75">We envision a community where struggling veterans are not defined by homelessness, financial hardship, trauma, or difficulty transitioning into civilian life, but instead are recognized for their experience, abilities, resilience, and potential.</p><p className="mt-6 max-w-2xl text-lg leading-8 text-cream/75">Through housing, education, mentorship, employment preparation, entrepreneurship, and practical skill development, Shepherds Not Sheep seeks to help veterans establish lasting independence and meaningful lives.</p></div></Container></section>
     <Callout eyebrow="The promise" title="Food. Shelter. Purpose. A way forward." description="Our work is still being built. The standard is clear: meet people with dignity, tell the truth about what exists, and keep moving toward what is possible." href="/transparency" label="See our transparency plan" />
   </>
 }
-
-function PageHero() { return <section className="relative overflow-hidden border-b border-navy/10 bg-navy text-cream"><Container className="py-20 sm:py-28 lg:py-32"><p className="eyebrow text-cream/55">Why we exist</p><h1 className="mt-5 max-w-4xl text-6xl font-semibold leading-[0.95] tracking-[-0.06em] sm:text-7xl lg:text-8xl">A community for the next chapter.</h1><p className="mt-7 max-w-2xl text-lg leading-8 text-cream/70">Our mission begins with immediate needs and continues toward lasting independence, purpose, and belonging.</p></Container></section> }

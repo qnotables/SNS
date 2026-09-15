@@ -29,7 +29,7 @@
   --color-charcoal: #2b302f;
   --color-red: #a14e42;
   --font-sans: 'Arial', 'Helvetica Neue', sans-serif;
-  --font-display: 'Arial', 'Helvetica Neue', sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
   --radius-sm: 0.15rem;
   --radius-md: 0.25rem;
   --radius-lg: 0.4rem;
@@ -62,6 +62,7 @@
 * { @apply border-border; }
 html { scroll-behavior: smooth; }
 body { @apply bg-background text-foreground; font-family: var(--font-sans); }
+h1, h2, h3 { font-family: var(--font-display); }
 ::selection { background: #66704a; color: #f4f0e8; }
 
 @layer utilities {
