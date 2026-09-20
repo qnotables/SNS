@@ -1,17 +1,87 @@
 import type { Metadata } from 'next'
-import { AlertTriangle, ArrowUpRight } from 'lucide-react'
+import { CheckCircle2, Info } from 'lucide-react'
+import { Container, Eyebrow } from '@/components/site-sections'
+import { CrisisBlock } from '@/components/crisis-block'
 import { AssistanceForm } from '@/components/site-forms'
-import { ButtonLink, Container, PageHero, SectionHeading } from '@/components/site-sections'
 
-export const metadata: Metadata = { title: 'Veteran Assistance' }
+export const metadata: Metadata = {
+  title: 'Get Help',
+  description: 'Reach Shepherds Not Sheep for veteran support. In a crisis, call 988 and press 1. For non-urgent help, send us a message and we will respond within 2 business days.',
+}
 
-const categories = ['Housing instability', 'Food insecurity', 'VA benefits and resources', 'Employment', 'Education', 'Financial hardship', 'Business and entrepreneurship', 'Skills training', 'Transportation', 'Community and mentorship']
+const canHelpWith = [
+  'Pointing you toward VA benefits and community resources',
+  'Listening and helping you think through next steps',
+  'Connecting you with mentors and partner organizations as we grow',
+]
 
-export default function AssistancePage() {
-  return <>
-    <PageHero eyebrow="For veterans" title="You do not have to figure out the next step alone." description="If you are facing instability or transition challenges, tell us what you are navigating. Our assistance programs are in development, and this form is a placeholder for a future intake path." />
-    <section className="bg-cream py-20 sm:py-28"><Container><div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24"><div><SectionHeading eyebrow="Where we hope to help" title="Start with what is most urgent." /><p className="mt-6 text-base leading-8 text-charcoal/65">Planned assistance areas include:</p><div className="mt-6 flex flex-wrap gap-2">{categories.map((category) => <span key={category} className="border border-navy/15 bg-[#ebe6dc] px-3 py-2 text-xs font-semibold text-navy">{category}</span>)}</div></div><div className="rounded-sm border border-navy/15 bg-[#ebe6dc] p-6 sm:p-8"><p className="eyebrow text-olive">Request assistance</p><h2 className="mt-4 text-2xl font-semibold text-navy">Share a starting point.</h2><p className="mt-3 mb-8 text-sm leading-7 text-charcoal/65">This placeholder does not currently send or store your information.</p><AssistanceForm /></div></div></Container></section>
-    <section className="border-y border-red/20 bg-red/10 py-8"><Container><div className="flex items-start gap-4"><AlertTriangle className="mt-1 shrink-0 text-red" aria-hidden="true" /><div><h2 className="font-semibold text-navy">If you are in immediate danger</h2><p className="mt-2 max-w-3xl text-sm leading-7 text-charcoal/75">Shepherds Not Sheep is still developing its programs. Emergency situations requiring immediate medical care, law enforcement, or crisis intervention should use appropriate emergency services in your area.</p></div></div></Container></section>
-    <section className="bg-navy py-14 text-cream"><Container className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div><p className="eyebrow text-cream/50">Another way to reach out</p><p className="mt-3 text-xl font-medium">Have a general question or referral?</p></div><ButtonLink href="/contact" variant="light">Contact us <ArrowUpRight data-icon="inline-end" aria-hidden="true" /></ButtonLink></Container></section>
-  </>
+const cannotYet = [
+  'Emergency shelter or same-day housing',
+  'Licensed medical, psychiatric, or clinical care',
+  'Financial assistance or guaranteed placement',
+]
+
+export default function VeteranAssistancePage() {
+  const contactEmail = process.env.CONTACT_TO_EMAIL || null
+
+  return (
+    <>
+      <section className="border-b border-navy/10 bg-navy py-16 text-cream sm:py-20">
+        <Container>
+          <div className="max-w-3xl">
+            <Eyebrow light>Get help</Eyebrow>
+            <h1 className="mt-5 text-4xl font-semibold leading-[1.02] tracking-[-0.04em] sm:text-5xl lg:text-6xl">You reached out. That is the hardest part.</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-cream/75">
+              Shepherds Not Sheep is being built to help veterans find footing again. We are early, and we will be honest with you about what we can and cannot do today.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <CrisisBlock />
+
+      <section className="bg-cream py-16 sm:py-20">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div>
+              <Eyebrow>What to expect</Eyebrow>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-navy sm:text-4xl">Honest about where we are.</h2>
+              <p className="mt-5 text-base leading-8 text-charcoal/70">
+                We are an organization in formation. Sending this form starts a conversation with a real person — it is not an intake into a housing or benefits program.
+              </p>
+
+              <div className="mt-8 space-y-3">
+                {canHelpWith.map((item) => (
+                  <div key={item} className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-olive" aria-hidden="true" />
+                    <p className="text-sm leading-7 text-charcoal/75">{item}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 rounded-sm border border-navy/15 bg-[#f4f0e8] p-5">
+                <div className="flex items-center gap-2">
+                  <Info className="size-4 shrink-0 text-navy" aria-hidden="true" />
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-navy">What we cannot provide yet</p>
+                </div>
+                <ul className="mt-3 space-y-2">
+                  {cannotYet.map((item) => (
+                    <li key={item} className="text-sm leading-7 text-charcoal/65">— {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="rounded-sm border border-navy/15 bg-white p-6 shadow-[0_16px_40px_rgba(23,41,54,0.07)] sm:p-8">
+              <h2 className="text-2xl font-semibold tracking-[-0.02em] text-navy">Tell us how we can help</h2>
+              <p className="mt-2 text-sm leading-7 text-charcoal/60">{'We read messages within 2 business days.'}</p>
+              <div className="mt-7">
+                <AssistanceForm contactEmail={contactEmail} />
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
+  )
 }

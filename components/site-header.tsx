@@ -6,14 +6,9 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
 const navigation = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Mission', href: '/our-mission' },
   { label: 'Programs', href: '/programs' },
-  { label: 'Veteran Assistance', href: '/veteran-assistance' },
   { label: 'Our Story', href: '/our-story' },
   { label: 'Get Involved', href: '/get-involved' },
-  { label: 'Donate', href: '/donate' },
-  { label: 'Transparency', href: '/transparency' },
   { label: 'Contact', href: '/contact' },
 ]
 
