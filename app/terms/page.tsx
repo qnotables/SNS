@@ -1,0 +1,18 @@
+import type { Metadata } from 'next'
+import { LegalList, LegalPage, LegalLink, createLegalMetadata } from '@/components/legal-page'
+
+export const metadata: Metadata = createLegalMetadata('Terms of Use', 'Plain-English terms for using the Shepherds Not Sheep website.')
+
+export default function TermsPage() {
+  return <LegalPage eyebrow="Terms" title="Clear expectations for using this site." description="These terms describe the intended use of the Shepherds Not Sheep website while the organization and its programs are in development." sections={[
+    { title: 'Informational purpose', children: <p>Website content is provided for general informational purposes. Content may describe ideas, future programs, resources, or organizational plans that are not yet active. We may update or remove content as information develops.</p> },
+    { title: 'No guarantee of services or acceptance', children: <p>Submitting a form, sending a message, or expressing interest does not guarantee services, housing, benefits, assistance, enrollment, eligibility, referral, employment, or acceptance into any current or future program. Availability and participation requirements may change.</p> },
+    { title: 'Not professional or government representation', children: <p>This website does not provide legal, medical, mental-health, financial, tax, or VA claims representation. Nothing on the site creates a professional-client relationship, benefits entitlement, or government affiliation. For emergencies or crisis situations, contact appropriate emergency or crisis services.</p> },
+    { title: 'Third-party resources', children: <p>We may share links or references to third-party resources for general information. We do not guarantee their availability, accuracy, eligibility rules, safety, or suitability. Review the third party’s own information and seek qualified guidance for decisions that affect you.</p> },
+    { title: 'Intellectual property', children: <p>Unless otherwise stated, website text, branding, graphics, and other materials belong to Shepherds Not Sheep or are used with permission. You may view the website for personal, non-commercial use. Do not copy, modify, distribute, or use materials in a way that suggests endorsement without permission.</p> },
+    { title: 'Prohibited misuse', children: <LegalList items={['Do not use the website for unlawful, fraudulent, abusive, threatening, or harmful activity.', 'Do not interfere with the website, bypass security, introduce malicious code, or attempt unauthorized access.', 'Do not submit another person’s information without appropriate permission.', 'Do not use forms or site content to send spam, solicitations, or unrelated commercial messages.']} /> },
+    { title: 'Disclaimers and limitation of liability', children: <p>The website is provided on an “as available” basis. To the extent allowed by applicable law, Shepherds Not Sheep does not guarantee that the website will always be available, current, accurate, complete, or free of harmful components, and is not responsible for losses arising from use of the website or reliance on its content.</p> },
+    { title: 'Changes and governing law', children: <><p>We may update these terms as the website and organization develop. The revised version will show a new Last Updated date when changes are made.</p><p>Governing law and venue: <strong className="font-semibold text-navy">[To be determined and updated before this policy is finalized.]</strong></p></> },
+    { title: 'Questions', children: <p>Questions about these terms may be sent through the <LegalLink href="/contact">contact page</LegalLink>.</p> },
+  ]} />
+}
