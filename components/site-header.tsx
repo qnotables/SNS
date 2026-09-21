@@ -6,14 +6,9 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
 const navigation = [
-  { label: 'Home', href: '/' },
-  { label: 'Our Mission', href: '/our-mission' },
   { label: 'Programs', href: '/programs' },
-  { label: 'Veteran Assistance', href: '/veteran-assistance' },
   { label: 'Our Story', href: '/our-story' },
   { label: 'Get Involved', href: '/get-involved' },
-  { label: 'Donate', href: '/donate' },
-  { label: 'Transparency', href: '/transparency' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -24,7 +19,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream/95 backdrop-blur">
       <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Link href="/" className="group flex min-w-0 shrink-0 items-center" onClick={() => setOpen(false)}>
-          <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="h-16 w-56 shrink-0 object-contain object-center sm:h-[4.5rem] sm:w-72" />
+          <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="h-14 w-44 shrink-0 object-contain object-center sm:h-[4.5rem] sm:w-72" />
         </Link>
 
         <nav className="hidden items-center gap-5 2xl:flex" aria-label="Main navigation">
@@ -36,7 +31,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button render={<a href="/veteran-assistance" />} nativeButton={false} className="hidden bg-red text-cream hover:bg-red/90 sm:inline-flex" size="lg">Get Help</Button>
+          <Button render={<a href="/veteran-assistance" />} nativeButton={false} className="bg-red px-3 text-cream hover:bg-red/90 sm:px-4" size="sm">Get Help</Button>
           <Button type="button" variant="outline" size="icon" className="border-navy/20 text-navy 2xl:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((current) => !current)}>
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </Button>
@@ -51,7 +46,6 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Button render={<a href="/veteran-assistance" />} nativeButton={false} className="mt-4 w-full bg-red text-cream hover:bg-red/90 sm:hidden">Get Help</Button>
           </nav>
         </div>
       )}

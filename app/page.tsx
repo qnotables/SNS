@@ -1,40 +1,93 @@
-import Image from 'next/image'
-import { ArrowDown } from 'lucide-react'
-import { ButtonLink, Callout, Container, Eyebrow, FounderPhotoFrame, FutureProgramTiles, PhotoBand, PillarCard, ProcessSteps, SectionHeading, pillars } from '@/components/site-sections'
+import Link from 'next/link'
+import { MapPin, Flag, Compass } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
+import { ButtonLink, Callout, Container, Eyebrow, SectionHeading, pillars, PillarCard, ProcessSteps } from '@/components/site-sections'
+import { CrisisBlock } from '@/components/crisis-block'
 
 export const dynamic = 'force-dynamic'
 
-export default function Home() {
-  return <>
-    <section className="relative overflow-hidden bg-navy text-cream">
-      <div className="absolute inset-0"><Image src="/images/sns-hero-workshop.png" alt="A veteran in a quiet workshop at the beginning of the day" fill priority loading="eager" sizes="100vw" className="object-cover opacity-50" /></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-navy/20" />
-      <div className="absolute inset-0 bg-navy/10" />
-      <Container className="relative grid min-h-[720px] items-end gap-14 py-20 sm:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
-        <div className="relative z-10 max-w-4xl"><Eyebrow light>Retreat &amp; reestablishment community for veterans</Eyebrow><h1 className="mt-6 max-w-4xl text-6xl font-semibold leading-[0.92] tracking-[-0.06em] sm:text-7xl lg:text-[7.5rem]">A hand up for those who served.</h1><p className="mt-8 text-xl font-medium tracking-wide text-cream/80 sm:text-2xl">Housing. Purpose. Skills. Community.</p><p className="mt-6 max-w-xl text-base leading-8 text-cream/65 sm:text-lg">Shepherds Not Sheep helps veterans facing homelessness and hardship rebuild stable, independent lives through shelter, education, mentorship, practical training, entrepreneurship, and community.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><ButtonLink href="/veteran-assistance" variant="light">Veteran seeking help</ButtonLink><ButtonLink href="/donate" className="border border-cream/30 bg-transparent text-cream hover:bg-cream/10">Support the mission</ButtonLink></div></div>
-        <div className="relative z-10 hidden min-h-[360px] lg:block"><div className="absolute right-0 top-0 w-[min(31vw,390px)] overflow-hidden border border-cream/30 bg-navy/40 p-2"><div className="relative aspect-[4/5] overflow-hidden"><Image src="/images/sns-community.png" alt="Veterans and mentors gathered around a workshop table" fill sizes="390px" className="object-cover" /><div className="absolute inset-0 bg-navy/25" /></div><p className="px-2 pb-2 pt-4 text-[10px] font-bold uppercase leading-5 tracking-[0.16em] text-cream/60">A community built around stability, service, and the next right step.</p></div><div className="absolute -bottom-4 right-[-2rem] h-px w-72 bg-cream/35" /></div>
-      </Container>
-      <div className="absolute bottom-8 left-5 hidden items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-cream/40 sm:flex lg:left-8"><ArrowDown aria-hidden="true" /> Scroll to explore</div>
-    </section>
+const trust = [
+  { icon: Flag, label: 'Founded by', value: 'A U.S. Army veteran, for fellow veterans.' },
+  { icon: MapPin, label: 'Service focus', value: 'Starting locally, with room to grow.' },
+  { icon: Compass, label: 'Current status', value: 'Organization in formation. Programs in development.' },
+]
 
-    <section className="bg-navy py-20 text-cream sm:py-28"><Container><div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><SectionHeading eyebrow="The idea" title="More than a shelter." light /><div><p className="max-w-3xl text-2xl font-medium leading-relaxed tracking-[-0.02em] text-cream/85 sm:text-4xl">Shepherds Not Sheep is a veteran reestablishment community designed to meet immediate needs while helping veterans build long-term independence.</p><div className="mt-10 border-l-2 border-red pl-5 text-2xl font-medium leading-tight text-cream sm:text-4xl">No veteran should be without food, shelter, purpose, or someone willing to help them find a way forward.</div></div></div></Container></section>
+export default function HomePage() {
+  return (
+    <>
+      <section className="relative overflow-hidden border-b border-navy/10 bg-navy text-cream">
+        <Container className="grid gap-12 py-20 sm:py-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-32">
+          <div className="max-w-3xl">
+            <Eyebrow light>Shepherds Not Sheep</Eyebrow>
+            <h1 className="mt-5 text-5xl font-semibold leading-[0.98] tracking-[-0.055em] sm:text-6xl lg:text-7xl">A hand up for those who served.</h1>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-cream/75 sm:text-xl">Housing. Purpose. Skills. Community. We help homeless and distressed veterans rebuild stable, independent lives.</p>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <ButtonLink href="/veteran-assistance" variant="light">Get Help</ButtonLink>
+              <Button render={<Link href="/get-involved" />} nativeButton={false} variant="outline" size="lg" className="border-cream/40 bg-transparent text-cream hover:bg-cream/10">Get Involved<ArrowRight data-icon="inline-end" aria-hidden="true" /></Button>
+            </div>
+            <p className="mt-7 text-sm leading-7 text-cream/55">Our programs are still being built. This site describes what we are creating and how to reach us today.</p>
+          </div>
+          <div className="flex justify-center lg:justify-end">
+            <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="w-full max-w-md rounded-sm bg-cream/95 p-6 object-contain" />
+          </div>
+        </Container>
+      </section>
 
-    <PhotoBand src="/images/sns-craftsmanship.png" alt="Hands measuring a piece of wood on a workbench" eyebrow="Purpose in practice" title="Stability creates room to build." description="The work is practical by design. A safe place to begin, a skill worth learning, a mentor who follows through, and a community that sees more than a difficult season." />
+      <section className="border-b border-navy/10 bg-[#f4f0e8] py-10">
+        <Container>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {trust.map((item) => (
+              <div key={item.label} className="flex items-start gap-3">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-sm border border-olive/30 bg-olive/10 text-olive"><item.icon className="size-5" aria-hidden="true" /></span>
+                <div>
+                  <p className="eyebrow text-charcoal/40">{item.label}</p>
+                  <p className="mt-1 text-sm leading-6 text-charcoal/75">{item.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-    <section className="border-y border-navy/10 bg-white py-20 sm:py-28"><Container><SectionHeading eyebrow="Our Program Model" title="Six pillars. One path forward." children={<p>Our planned programs are designed to connect stability with purpose — because lasting independence takes more than one kind of support.</p>} /><div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{pillars.map((pillar) => <PillarCard key={pillar.title} {...pillar} />)}</div><div className="mt-12"><ButtonLink href="/programs" variant="outline">Explore planned programs</ButtonLink></div></Container></section>
+      <section className="bg-cream py-20 sm:py-24">
+        <Container>
+          <SectionHeading eyebrow="What we are building" title="Six ways we plan to walk alongside veterans.">
+            <p>Each area below is in development. Together they form a path from immediate stability toward lasting independence.</p>
+          </SectionHeading>
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {pillars.map((pillar) => <PillarCard key={pillar.title} {...pillar} />)}
+          </div>
+        </Container>
+      </section>
 
-    <section className="bg-cream py-20 sm:py-28"><Container><SectionHeading eyebrow="The Reestablishment Path" title="How reestablishment can work." children={<p>The path is intentionally practical: start with immediate stability, then build a plan around the veteran&apos;s strengths, needs, and next chapter.</p>} /><div className="mt-14"><ProcessSteps /></div></Container></section>
+      <section className="border-y border-navy/10 bg-[#ebe6dc] py-20 sm:py-24">
+        <Container>
+          <SectionHeading eyebrow="How it will work" title="A clear path, one step at a time." />
+          <div className="mt-14">
+            <ProcessSteps />
+          </div>
+        </Container>
+      </section>
 
-    <PhotoBand src="/images/sns-community.png" alt="Veterans and mentors gathered around a workshop table" eyebrow="Community is part of the work" title="Rebuilding does not happen alone." description="Shepherds Not Sheep seeks to bring veterans, mentors, educators, skilled tradespeople, businesses, and community partners around a shared commitment to the next right step." dark />
+      <CrisisBlock />
 
-    <section className="bg-olive py-20 text-cream sm:py-28"><Container><div className="grid gap-12 lg:grid-cols-2 lg:gap-24"><div><Eyebrow light>Our mission</Eyebrow><p className="mt-6 text-3xl font-medium leading-tight tracking-[-0.03em] sm:text-4xl">Shepherds Not Sheep is dedicated to helping homeless and distressed veterans rebuild stable, independent, and purposeful lives.</p></div><div className="text-base leading-8 text-cream/75"><p>We seek to provide a secure and supportive community where veterans have access to shelter, food, education, mentorship, entrepreneurship opportunities, vocational training, and assistance navigating veteran benefits and community resources.</p><p className="mt-6">Our mission extends beyond meeting immediate needs. We aim to provide veterans with the foundation, skills, confidence, and support necessary to overcome challenges, rediscover purpose, and build a self-sufficient future.</p></div></div></Container></section>
+      <section className="bg-cream py-20 sm:py-24">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
+            <div>
+              <Eyebrow>Our story</Eyebrow>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.035em] text-navy sm:text-4xl">Started by someone who has been there.</h2>
+            </div>
+            <div className="text-lg leading-8 text-charcoal/75">
+              <p>Shepherds Not Sheep grew out of a simple conviction: veterans who have carried heavy loads deserve a community that helps them carry the next one. We are building that community deliberately and honestly.</p>
+              <Link href="/our-story" className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.12em] text-olive hover:text-navy">Read our story <ArrowRight aria-hidden="true" /></Link>
+            </div>
+          </div>
+        </Container>
+      </section>
 
-    <section className="bg-cream py-20 sm:py-28"><Container><div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-24"><div><SectionHeading eyebrow="Our vision" title="A future with a path forward." /><p className="mt-8 max-w-xl text-base leading-8 text-charcoal/70">Our vision is a future where no veteran is left without food, shelter, purpose, or a path forward.</p><p className="mt-5 max-w-xl text-base leading-8 text-charcoal/70">We envision a community where struggling veterans are recognized for their experience, abilities, resilience, and potential. Through housing, education, mentorship, employment preparation, entrepreneurship, and practical skill development, we seek to help veterans establish lasting independence and meaningful lives.</p></div><div className="border-t border-navy/15 pt-6 lg:mt-16"><Eyebrow>Long-term intention</Eyebrow><p className="mt-4 text-2xl font-medium leading-relaxed text-navy">Bring veterans and the people, organizations, and opportunities around them together in service of a common mission.</p><ButtonLink href="/our-mission" variant="outline" className="mt-7">Read our mission</ButtonLink></div></div></Container></section>
-
-    <section className="border-t border-navy/10 bg-[#ebe6dc] py-20 sm:py-28"><Container><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-24"><FounderPhotoFrame /><div><Eyebrow>Founder perspective</Eyebrow><h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em] text-navy sm:text-5xl">Built from service. Shaped by transition.</h2><p className="mt-8 text-lg leading-8 text-charcoal/75">Shepherds Not Sheep was founded by U.S. Army veteran Sergeant Michael Thielmeier after recognizing many of the challenges veterans can face when transitioning from military service into civilian life.</p><p className="mt-6 text-lg leading-8 text-charcoal/75">The organization is intended to combine professional partnerships with practical, hands-on education and mentorship.</p><p className="mt-8 border-l-2 border-red pl-5 text-xl font-medium leading-8 text-navy">Help veterans regain stability, rediscover purpose, develop useful skills, and establish an independent future.</p><ButtonLink href="/our-story" variant="outline" className="mt-8">Read our story</ButtonLink></div></div></Container></section>
-
-    <section className="bg-navy py-20 text-cream sm:py-28"><Container><div className="grid gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:items-end lg:gap-24"><div><Eyebrow light>Future program goal</Eyebrow><h2 className="mt-5 text-4xl font-semibold tracking-[-0.04em] sm:text-5xl">Practice the work. Build the future.</h2><p className="mt-7 text-base leading-8 text-cream/70">Shepherds Not Sheep intends to develop mission-related activities that teach practical skills and support the organization over time.</p><p className="mt-6 text-sm leading-7 text-cream/50">These are long-term program goals, not currently operating services.</p></div><FutureProgramTiles /></div></Container></section>
-
-    <Callout eyebrow="Start a conversation" title="There is a place for you in this work." description="Whether you are a veteran seeking a path forward, a potential volunteer, or a partner with something to contribute, we are building the foundation now." href="/get-involved" label="Get involved" />
-  </>
+      <Callout eyebrow="Get started" title="Whether you need help or want to help — start here." description="Reach out today. We read every message and respond within 2 business days." href="/veteran-assistance" label="Get Help" />
+    </>
+  )
 }
