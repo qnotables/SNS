@@ -49,7 +49,7 @@ export default function ContactPage() {
             <div className="rounded-sm border border-navy/15 bg-white p-6 shadow-[0_16px_40px_rgba(23,41,54,0.07)] sm:p-8">
               <h2 className="text-2xl font-semibold tracking-[-0.02em] text-navy">Send a message</h2>
               <div className="mt-7">
-                <ContactForm contactEmail={contactEmail} />
+                <ContactForm />
               </div>
             </div>
           </div>
