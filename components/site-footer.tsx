@@ -21,7 +21,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr_0.9fr_1fr]">
           <div>
             <div className="mb-6 flex items-center">
-              <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="h-20 w-64 shrink-0 object-contain object-center" />
+              <img src="/images/sns-logo-footer.png" alt="Shepherds Not Sheep" className="h-20 w-64 shrink-0 object-contain object-left" />
             </div>
             <p className="max-w-sm text-lg font-medium leading-relaxed text-cream/90">Helping homeless and distressed veterans rebuild stable, independent lives.</p>
             <p className="mt-5 text-sm leading-7 text-cream/55">Programs are in development. Organization in formation.</p>

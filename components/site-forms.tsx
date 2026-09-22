@@ -37,25 +37,6 @@ function useInquiry() {
   return { state, error, submit }
 }
 
-function SubmissionsDisabled({ contactEmail }: { contactEmail: string | null }) {
-  return (
-    <div className="rounded-sm border border-navy/15 bg-cream p-5 text-sm leading-7 text-charcoal/75">
-      <p className="font-semibold text-navy">Online submissions are being set up.</p>
-      {contactEmail ? (
-        <p className="mt-2">
-          In the meantime, reach us directly at{' '}
-          <a href={`mailto:${contactEmail}`} className="font-semibold text-navy underline decoration-olive underline-offset-4 hover:text-olive">
-            {contactEmail}
-          </a>
-          .
-        </p>
-      ) : (
-        <p className="mt-2">Please check back soon — a direct contact email will be published here shortly.</p>
-      )}
-    </div>
-  )
-}
-
 function SuccessCard({ children }: { children: React.ReactNode }) {
   return (
     <div role="status" className="flex gap-3 rounded-sm border border-olive/30 bg-olive/10 p-5 text-sm leading-7 text-navy">
@@ -87,11 +68,9 @@ function Honeypot() {
 
 const assistanceNeeds = ['Housing', 'Food', 'VA benefits', 'Employment', 'Education', 'Transport', 'Mentorship', 'Other']
 
-export function AssistanceForm({ contactEmail }: { contactEmail: string | null }) {
+export function AssistanceForm() {
   const { state, error, submit } = useInquiry()
   const [need, setNeed] = useState('')
-
-  if (!contactEmail) return <SubmissionsDisabled contactEmail={contactEmail} />
 
   if (state === 'success') {
     return (
@@ -159,11 +138,9 @@ export function AssistanceForm({ contactEmail }: { contactEmail: string | null }
 
 const involveRoles = ['Volunteer', 'Mentor', 'Hire an intern', 'Donate gear', 'Sponsor', 'Refer a veteran', 'Other']
 
-export function InvolveForm({ contactEmail }: { contactEmail: string | null }) {
+export function InvolveForm() {
   const { state, error, submit } = useInquiry()
   const [role, setRole] = useState('')
-
-  if (!contactEmail) return <SubmissionsDisabled contactEmail={contactEmail} />
 
   if (state === 'success') {
     return (
@@ -217,10 +194,8 @@ export function InvolveForm({ contactEmail }: { contactEmail: string | null }) {
   )
 }
 
-export function ContactForm({ contactEmail }: { contactEmail: string | null }) {
+export function ContactForm() {
   const { state, error, submit } = useInquiry()
-
-  if (!contactEmail) return <SubmissionsDisabled contactEmail={contactEmail} />
 
   if (state === 'success') {
     return (

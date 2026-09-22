@@ -54,7 +54,7 @@ export default function GetInvolvedPage() {
               <h2 className="text-2xl font-semibold tracking-[-0.02em] text-navy">Tell us how you can help</h2>
               <p className="mt-2 text-sm leading-7 text-charcoal/60">{'We read messages within 2 business days.'}</p>
               <div className="mt-7">
-                <InvolveForm contactEmail={contactEmail} />
+                <InvolveForm />
               </div>
             </div>
           </div>
