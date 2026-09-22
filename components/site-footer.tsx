@@ -14,7 +14,7 @@ const footerNavigation = [
 ]
 
 export function SiteFooter() {
-  const contactEmail = process.env.CONTACT_TO_EMAIL || null
+  const contactEmail = 'contact@shepherdsnotsheep.org'
   return (
     <footer className="bg-navy text-cream">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">

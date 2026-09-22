@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
-  const contactEmail = process.env.CONTACT_TO_EMAIL || null
+  const contactEmail = 'contact@shepherdsnotsheep.org'
 
   return (
     <>
