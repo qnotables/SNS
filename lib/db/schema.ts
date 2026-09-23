@@ -93,7 +93,15 @@ export const inquiryReplies = pgTable('inquiry_replies', {
   sentAt: timestamp('sent_at', { withTimezone: true }).notNull().defaultNow(),
 })
 
+export const inquiryNotes = pgTable('inquiry_notes', {
+  id: text('id').primaryKey(),
+  inquiryId: text('inquiry_id').notNull(),
+  note: text('note').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
 export type Inquiry = typeof inquiries.$inferSelect
+export type InquiryNote = typeof inquiryNotes.$inferSelect
 export const outboundEmails = pgTable('outbound_emails', {
   id: text('id').primaryKey(),
   resendId: text('resend_id').unique(),
