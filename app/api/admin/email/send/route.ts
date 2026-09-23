@@ -55,8 +55,13 @@ export async function POST(request: Request) {
   const result = await resend.emails.send(emailPayload, { idempotencyKey: `admin-email/${id}` })
 
   if (result.error) {
+    console.error('[v0] Resend email send failed:', result.error)
     await db.insert(outboundEmails).values({ id, fromEmail: from, toEmails: to.join(', '), ccEmails: cc.length ? cc.join(', ') : null, subject, textBody: textBody || null, htmlBody: htmlBody || null, status: 'failed', errorMessage: result.error.message })
-    return NextResponse.json({ error: 'Resend could not send this message.' }, { status: 502 })
+    const statusCode = typeof result.error.statusCode === 'number' ? result.error.statusCode : undefined
+    return NextResponse.json(
+      { success: false, error: result.error.message, ...(statusCode === undefined ? {} : { statusCode }) },
+      { status: 502 },
+    )
   }
 
   await db.insert(outboundEmails).values({ id, resendId: result.data?.id, fromEmail: from, toEmails: to.join(', '), ccEmails: cc.length ? cc.join(', ') : null, subject, textBody: textBody || null, htmlBody: htmlBody || null, status: 'sent' })

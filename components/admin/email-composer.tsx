@@ -12,10 +12,11 @@ export function EmailComposer({ defaultFrom }: { defaultFrom: string }) {
     setStatus(null)
     const form = new FormData(event.currentTarget)
     const response = await fetch('/api/admin/email/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(form.entries())) })
-    const result = (await response.json()) as { error?: string }
+    const result = (await response.json()) as { success?: boolean; error?: string; statusCode?: number }
     setSending(false)
-    if (!response.ok) {
-      setStatus(result.error || 'Message could not be sent.')
+    if (!response.ok || result.success === false) {
+      const statusSuffix = result.statusCode ? ` (Resend status ${result.statusCode})` : ''
+      setStatus(`${result.error || 'Message could not be sent.'}${statusSuffix}`)
       return
     }
     event.currentTarget.reset()
