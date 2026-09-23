@@ -94,4 +94,33 @@ export const inquiryReplies = pgTable('inquiry_replies', {
 })
 
 export type Inquiry = typeof inquiries.$inferSelect
+export const outboundEmails = pgTable('outbound_emails', {
+  id: text('id').primaryKey(),
+  resendId: text('resend_id').unique(),
+  fromEmail: text('from_email').notNull(),
+  toEmails: text('to_emails').notNull(),
+  ccEmails: text('cc_emails'),
+  subject: text('subject').notNull(),
+  textBody: text('text_body'),
+  htmlBody: text('html_body'),
+  status: text('status').notNull().default('sent'),
+  errorMessage: text('error_message'),
+  sentAt: timestamp('sent_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
+export const receivedEmails = pgTable('received_emails', {
+  id: text('id').primaryKey(),
+  resendId: text('resend_id').unique().notNull(),
+  fromEmail: text('from_email').notNull(),
+  toEmails: text('to_emails').notNull(),
+  ccEmails: text('cc_emails'),
+  subject: text('subject').notNull(),
+  textBody: text('text_body'),
+  htmlBody: text('html_body'),
+  messageId: text('message_id'),
+  receivedAt: timestamp('received_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
 export type InquiryReply = typeof inquiryReplies.$inferSelect
+export type OutboundEmail = typeof outboundEmails.$inferSelect
+export type ReceivedEmail = typeof receivedEmails.$inferSelect

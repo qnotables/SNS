@@ -25,7 +25,9 @@ export default async function AdminInquiriesPage() {
         <Container>
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm text-charcoal/70">{rows.length} recent submissions</p>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
+              <Link href="/admin/email/inbox" className="border border-navy/20 px-4 py-2 text-sm font-semibold text-navy hover:bg-navy/5">Email inbox</Link>
+              <Link href="/admin/email/compose" className="border border-navy/20 px-4 py-2 text-sm font-semibold text-navy hover:bg-navy/5">Compose email</Link>
               <Link href="/admin/donations" className="border border-navy/20 px-4 py-2 text-sm font-semibold text-navy hover:bg-navy/5">Donations</Link>
               <a href="/api/admin/inquiries.csv" className="bg-navy px-4 py-2 text-sm font-semibold text-cream hover:bg-navy/90">Export CSV</a>
             </div>
