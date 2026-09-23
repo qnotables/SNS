@@ -81,4 +81,17 @@ export const inquiries = pgTable('inquiries', {
 })
 
 export type Donation = typeof donations.$inferSelect
+export const inquiryReplies = pgTable('inquiry_replies', {
+  id: text('id').primaryKey(),
+  inquiryId: text('inquiry_id').notNull(),
+  recipientEmail: text('recipient_email').notNull(),
+  subject: text('subject').notNull(),
+  message: text('message').notNull(),
+  status: text('status').notNull().default('sent'),
+  resendId: text('resend_id'),
+  errorMessage: text('error_message'),
+  sentAt: timestamp('sent_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
 export type Inquiry = typeof inquiries.$inferSelect
+export type InquiryReply = typeof inquiryReplies.$inferSelect
