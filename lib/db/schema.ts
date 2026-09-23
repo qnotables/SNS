@@ -63,4 +63,22 @@ export const donations = pgTable('donations', {
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 })
 
+export const inquiries = pgTable('inquiries', {
+  id: text('id').primaryKey(),
+  inquiryType: text('inquiry_type').notNull(),
+  name: text('name'),
+  email: text('email'),
+  phone: text('phone'),
+  city: text('city'),
+  subject: text('subject'),
+  need: text('need'),
+  role: text('role'),
+  skills: text('skills'),
+  availability: text('availability'),
+  heardFrom: text('heard_from'),
+  message: text('message').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+})
+
 export type Donation = typeof donations.$inferSelect
+export type Inquiry = typeof inquiries.$inferSelect

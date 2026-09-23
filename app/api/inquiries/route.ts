@@ -1,5 +1,8 @@
+import { randomUUID } from 'node:crypto'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { db } from '@/lib/db'
+import { inquiries } from '@/lib/db/schema'
 
 type InquiryType = 'assistance' | 'involve' | 'contact'
 
@@ -25,7 +28,22 @@ function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
-function buildRows(type: InquiryType, body: Record<string, unknown>): { rows: FieldRow[]; error?: string; replyTo?: string } {
+type InquiryRecord = {
+  inquiryType: InquiryType
+  name: string | null
+  email: string | null
+  phone: string | null
+  city: string | null
+  subject: string | null
+  need: string | null
+  role: string | null
+  skills: string | null
+  availability: string | null
+  heardFrom: string | null
+  message: string
+}
+
+function buildRows(type: InquiryType, body: Record<string, unknown>): { rows: FieldRow[]; error?: string; replyTo?: string; record?: InquiryRecord } {
   const name = clean(body.name)
   const email = clean(body.email)
   const phone = clean(body.phone)
@@ -51,6 +69,20 @@ function buildRows(type: InquiryType, body: Record<string, unknown>): { rows: Fi
         { label: 'Description', value: message },
       ],
       replyTo: email || undefined,
+      record: {
+        inquiryType: type,
+        name: name || null,
+        email: email || null,
+        phone: phone || null,
+        city: city || null,
+        subject: null,
+        need,
+        role: null,
+        skills: null,
+        availability: null,
+        heardFrom: heardFrom || null,
+        message,
+      },
     }
   }
 
@@ -72,6 +104,20 @@ function buildRows(type: InquiryType, body: Record<string, unknown>): { rows: Fi
         { label: 'Message', value: message || 'Not provided' },
       ],
       replyTo: email,
+      record: {
+        inquiryType: type,
+        name,
+        email,
+        phone: null,
+        city: city || null,
+        subject: null,
+        need: null,
+        role,
+        skills: skills || null,
+        availability: availability || null,
+        heardFrom: null,
+        message: message || 'Not provided',
+      },
     }
   }
 
@@ -88,6 +134,20 @@ function buildRows(type: InquiryType, body: Record<string, unknown>): { rows: Fi
       { label: 'Message', value: message },
     ],
     replyTo: email,
+    record: {
+      inquiryType: type,
+      name,
+      email,
+      phone: phone || null,
+      city: null,
+      subject: subject || null,
+      need: null,
+      role: null,
+      skills: null,
+      availability: null,
+      heardFrom: null,
+      message,
+    },
   }
 }
 
@@ -101,13 +161,6 @@ export async function POST(request: Request) {
   const toEmail = process.env.CONTACT_TO_EMAIL
   const domain = process.env.RESEND_EMAIL_DOMAIN
   const apiKey = process.env.RESEND_API_KEY
-
-  if (!toEmail || !domain || !apiKey) {
-    return NextResponse.json(
-      { error: 'Online submissions are not fully configured yet. Please use the contact email listed on this page.' },
-      { status: 503 },
-    )
-  }
 
   let body: Record<string, unknown>
   try {
@@ -126,9 +179,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true })
   }
 
-  const { rows, error, replyTo } = buildRows(type, body)
-  if (error) {
-    return NextResponse.json({ error }, { status: 400 })
+  const { rows, error, replyTo, record } = buildRows(type, body)
+  if (error || !record) {
+    return NextResponse.json({ error: error || 'Invalid request.' }, { status: 400 })
+  }
+
+  await db.insert(inquiries).values({ id: randomUUID(), ...record })
+
+  if (!toEmail || !domain || !apiKey) {
+    return NextResponse.json({ ok: true, emailSent: false })
   }
 
   const resend = new Resend(apiKey)
@@ -151,9 +210,9 @@ export async function POST(request: Request) {
   })
 
   if (sendError) {
-    console.error('[v0] Resend send failed:', sendError.message)
-    return NextResponse.json({ error: 'We could not send your message right now. Please try again shortly.' }, { status: 502 })
+    console.error('[v0] Resend notification failed after inquiry was saved:', sendError.message)
+    return NextResponse.json({ ok: true, emailSent: false })
   }
 
-  return NextResponse.json({ ok: true })
+  return NextResponse.json({ ok: true, emailSent: true })
 }
