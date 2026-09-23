@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { desc } from 'drizzle-orm'
+import { desc, inArray } from 'drizzle-orm'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { InquiryActions } from '@/components/admin/inquiry-actions'
 import { InquiryReplyForm } from '@/components/admin/inquiry-reply-form'
 import { Container, PageHero } from '@/components/site-sections'
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { inquiries } from '@/lib/db/schema'
+import { inquiryNotes, inquiries } from '@/lib/db/schema'
 
 export const metadata: Metadata = { title: 'Inquiry inbox' }
 
@@ -17,6 +18,9 @@ export default async function AdminInquiriesPage() {
   if (session.user.email.toLowerCase() !== process.env.ADMIN_EMAIL?.toLowerCase()) redirect('/')
 
   const rows = await db.select().from(inquiries).orderBy(desc(inquiries.createdAt)).limit(500)
+  const notes = rows.length ? await db.select().from(inquiryNotes).where(inArray(inquiryNotes.inquiryId, rows.map((row) => row.id))).orderBy(desc(inquiryNotes.createdAt)) : []
+  const notesByInquiry = new Map<string, typeof notes>()
+  for (const note of notes) notesByInquiry.set(note.inquiryId, [...(notesByInquiry.get(note.inquiryId) || []), note])
 
   return (
     <>
@@ -36,7 +40,7 @@ export default async function AdminInquiriesPage() {
             <table className="w-full min-w-[1050px] text-left text-sm">
               <thead className="border-b border-navy/15 bg-navy text-cream"><tr><th className="px-4 py-4">Date</th><th className="px-4 py-4">Type</th><th className="px-4 py-4">Name</th><th className="px-4 py-4">Email</th><th className="px-4 py-4">Phone</th><th className="px-4 py-4">Topic</th><th className="px-4 py-4">Message</th><th className="px-4 py-4">Reply</th></tr></thead>
               <tbody>
-                {rows.length ? rows.map((row) => <tr key={row.id} className="border-b border-navy/10 align-top last:border-0"><td className="whitespace-nowrap px-4 py-4 text-charcoal/70">{row.createdAt.toLocaleString()}</td><td className="px-4 py-4 capitalize text-charcoal/70">{row.inquiryType}</td><td className="px-4 py-4 font-semibold text-navy">{row.name || 'Not provided'}</td><td className="px-4 py-4 text-charcoal/70">{row.email || '—'}</td><td className="px-4 py-4 text-charcoal/70">{row.phone || '—'}</td><td className="px-4 py-4 text-charcoal/70">{row.subject || row.need || row.role || '—'}</td><td className="max-w-[360px] whitespace-pre-wrap px-4 py-4 text-charcoal/80">{row.message}</td><td className="px-4 py-4">{row.email ? <InquiryReplyForm inquiryId={row.id} recipientEmail={row.email} defaultSubject={`Re: ${row.subject || row.need || row.role || 'Your inquiry'}`} /> : <span className="text-xs text-charcoal/50">No email</span>}</td></tr>) : <tr><td colSpan={8} className="px-4 py-12 text-center text-charcoal/60">No inquiries yet.</td></tr>}
+                {rows.length ? rows.map((row) => <tr key={row.id} className="border-b border-navy/10 align-top last:border-0"><td className="whitespace-nowrap px-4 py-4 text-charcoal/70">{row.createdAt.toLocaleString()}</td><td className="px-4 py-4 capitalize text-charcoal/70">{row.inquiryType}</td><td className="px-4 py-4 font-semibold text-navy">{row.name || 'Not provided'}</td><td className="px-4 py-4 text-charcoal/70">{row.email || '—'}</td><td className="px-4 py-4 text-charcoal/70">{row.phone || '—'}</td><td className="px-4 py-4 text-charcoal/70">{row.subject || row.need || row.role || '—'}</td><td className="max-w-[360px] whitespace-pre-wrap px-4 py-4 text-charcoal/80">{row.message}</td><td className="px-4 py-4"><div className="space-y-4">{row.email ? <InquiryReplyForm inquiryId={row.id} recipientEmail={row.email} defaultSubject={`Re: ${row.subject || row.need || row.role || 'Your inquiry'}`} /> : <span className="text-xs text-charcoal/50">No email</span>}<InquiryActions inquiryId={row.id} notes={(notesByInquiry.get(row.id) || []).map((note) => ({ id: note.id, note: note.note, createdAt: note.createdAt.toLocaleString() }))} /></div></td></tr>) : <tr><td colSpan={8} className="px-4 py-12 text-center text-charcoal/60">No inquiries yet.</td></tr>}
               </tbody>
             </table>
           </div>
