@@ -9,6 +9,8 @@ const navigation = [
   { label: 'Programs', href: '/programs' },
   { label: 'Our Story', href: '/our-story' },
   { label: 'Get Involved', href: '/get-involved' },
+  { label: 'Transparency', href: '/transparency' },
+  { label: 'Donate', href: '/donate' },
   { label: 'Contact', href: '/contact' },
 ]
 
