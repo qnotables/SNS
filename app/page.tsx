@@ -9,12 +9,12 @@ export const dynamic = 'force-dynamic'
 const trust = [
   { icon: Flag, label: 'Founded by', value: 'A U.S. Army veteran, for fellow veterans.' },
   { icon: MapPin, label: 'Service focus', value: 'Starting locally, with room to grow.' },
-  { icon: Compass, label: 'Current status', value: 'Organization in formation. Programs in development.' },
+  { icon: Compass, label: 'Current status', value: 'IRS-approved 501(c)(3) nonprofit. Programs in development.' },
 ]
 
 const milestones = [
-  { title: 'Organization Formation', status: 'In Progress', description: 'Core structure, mission, and operating foundation are being established.' },
-  { title: 'Nonprofit / 501(c)(3) Status', status: 'To Be Published', description: 'No tax-exempt status is claimed. Official details will be posted only once confirmed.' },
+  { title: 'Organization Formation', status: 'Complete', description: 'Shepherds Not Sheep is formally established as a nonprofit organization.' },
+  { title: 'Nonprofit / 501(c)(3) Status', status: 'Approved', description: 'Recognized by the IRS as a 501(c)(3) tax-exempt organization. Donations are tax-deductible to the extent allowed by law.' },
   { title: 'Community Partnerships', status: 'Developing', description: 'Building relationships with organizations, mentors, and local resources.' },
   { title: 'Veteran Assistance Intake', status: 'In Development', description: 'Today the contact form starts a conversation — it is not yet a formal intake program.' },
   { title: 'Fundraising Infrastructure', status: 'Active', description: 'Secure one-time and monthly giving is live through Stripe.' },
@@ -22,7 +22,7 @@ const milestones = [
 ]
 
 function MilestoneCard({ title, status, description }: { title: string; status: string; description: string }) {
-  const active = status === 'Active'
+  const active = ['Active', 'Approved', 'Complete'].includes(status)
   return (
     <article className="flex flex-col justify-between gap-4 border border-navy/15 border-t-4 border-t-olive bg-cream p-6">
       <div className="flex items-start justify-between gap-4">
@@ -48,7 +48,7 @@ export default function HomePage() {
               <Button render={<Link href="/get-involved" />} nativeButton={false} variant="outline" size="lg" className="border-cream/40 bg-transparent text-cream hover:bg-cream/10">Get Involved<ArrowRight data-icon="inline-end" aria-hidden="true" /></Button>
             </div>
             <div className="mt-9 max-w-xl rounded-sm border border-cream/20 bg-cream/5 p-5">
-              <p className="text-sm leading-7 text-cream/80">Organization in formation. Programs and partnerships are currently being developed.</p>
+              <p className="text-sm leading-7 text-cream/80">An IRS-approved 501(c)(3) nonprofit organization. Programs and partnerships are currently being developed.</p>
               <Link href="/transparency" className="mt-3 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-cream underline decoration-red decoration-2 underline-offset-4 hover:text-cream/80">View our current status and transparency information <ArrowRight className="size-4" aria-hidden="true" /></Link>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function HomePage() {
                 <ButtonLink href="/donate" variant="light">Donate</ButtonLink>
                 <Button render={<Link href="/donate?fund=founding" />} nativeButton={false} variant="outline" size="lg" className="border-cream/40 bg-transparent text-cream hover:bg-cream/10">Become a Founding Supporter<ArrowRight data-icon="inline-end" aria-hidden="true" /></Button>
               </div>
-              <p className="mt-6 text-xs leading-6 text-cream/50">Shepherds Not Sheep is an organization in formation. Donations are not tax-deductible at this time.</p>
+              <p className="mt-6 text-xs leading-6 text-cream/50">Shepherds Not Sheep is a 501(c)(3) nonprofit organization. Donations are tax-deductible to the extent allowed by law.</p>
             </div>
             <div className="flex justify-center lg:justify-end">
               <div className="flex size-40 items-center justify-center rounded-full border border-cream/25 bg-cream/10 text-cream/80"><HeartHandshake className="size-20" aria-hidden="true" /></div>

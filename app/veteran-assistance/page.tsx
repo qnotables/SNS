@@ -47,7 +47,7 @@ export default function VeteranAssistancePage() {
               <Eyebrow>What to expect</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-navy sm:text-4xl">Honest about where we are.</h2>
               <p className="mt-5 text-base leading-8 text-charcoal/70">
-                We are an organization in formation. Sending this form starts a conversation with a real person — it is not an intake into a housing or benefits program.
+                We are a young nonprofit, and our programs are still being built. Sending this form starts a conversation with a real person — it is not an intake into a housing or benefits program.
               </p>
 
               <div className="mt-8 space-y-3">
