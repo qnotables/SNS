@@ -171,7 +171,7 @@ export default function HomePage() {
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.035em] text-navy sm:text-4xl">Started by someone who has been there.</h2>
             </div>
             <div className="text-lg leading-8 text-charcoal/75">
-              <p>Shepherds Not Sheep was founded by U.S. Army veteran Sergeant Michael Thielmeier, who has firsthand experience navigating military transition, disability, benefits, and civilian life. That experience shapes a simple conviction: veterans who have carried heavy loads deserve a community that helps them carry the next one.</p>
+              <p>Shepherds Not Sheep was founded by a U.S. Army veteran who has firsthand experience navigating military transition, disability, benefits, and civilian life. That experience shapes a simple conviction: veterans who have carried heavy loads deserve a community that helps them carry the next one.</p>
               <Link href="/our-story" className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.12em] text-olive hover:text-navy">Read Our Story <ArrowRight aria-hidden="true" /></Link>
             </div>
           </div>

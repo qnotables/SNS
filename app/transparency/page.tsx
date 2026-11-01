@@ -20,7 +20,7 @@ const planned = [
 const rows = [
   ['501(c)(3) nonprofit status', 'Approved', 'Shepherds Not Sheep is recognized by the IRS as a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code.'],
   ['Tax-deductible donations', 'Active', 'Donations are tax-deductible to the extent allowed by law. Our EIN is available upon request through the contact page.'],
-  ['Leadership and board members', 'In development', 'Founded and led by U.S. Army veteran Sergeant Michael Thielmeier; board and governance details will be published with appropriate context.'],
+  ['Leadership and board members', 'In development', 'Founded and led by a U.S. Army veteran; board and governance details will be published with appropriate context.'],
   ['Annual and financial reports', 'Coming soon', 'Reports will be shared as the organization establishes reporting history.'],
   ['Policies', 'In development', 'Core policies and governance materials are being prepared.'],
   ['Major funding sources', 'To be published', 'Funding relationships will be disclosed when active and confirmed.'],
