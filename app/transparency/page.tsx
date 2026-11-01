@@ -3,7 +3,7 @@ import { Container, Eyebrow, PageHero, SectionHeading, StatusRow } from '@/compo
 
 export const metadata: Metadata = { title: 'Transparency' }
 
-const LAST_UPDATED = 'September 24, 2026'
+const LAST_UPDATED = 'November 1, 2026'
 
 const active = [
   ['Secure online donations', 'Active', 'One-time and monthly giving is processed securely through Stripe.'],
@@ -18,8 +18,8 @@ const planned = [
 ]
 
 const rows = [
-  ['Nonprofit registration information', 'To be published', 'Official registration details will be added when confirmed.'],
-  ['EIN and tax information', 'To be published', 'No tax status, exemption, or tax-deductibility is being represented here.'],
+  ['501(c)(3) nonprofit status', 'Approved', 'Shepherds Not Sheep is recognized by the IRS as a tax-exempt organization under Section 501(c)(3) of the Internal Revenue Code.'],
+  ['Tax-deductible donations', 'Active', 'Donations are tax-deductible to the extent allowed by law. Our EIN is available upon request through the contact page.'],
   ['Leadership and board members', 'In development', 'Founded and led by U.S. Army veteran Sergeant Michael Thielmeier; board and governance details will be published with appropriate context.'],
   ['Annual and financial reports', 'Coming soon', 'Reports will be shared as the organization establishes reporting history.'],
   ['Policies', 'In development', 'Core policies and governance materials are being prepared.'],
@@ -37,6 +37,6 @@ export default function TransparencyPage() {
       <div><Eyebrow>Still being built</Eyebrow><h2 className="mt-4 text-2xl font-semibold tracking-[-0.03em] text-navy sm:text-3xl">What services are planned.</h2><div className="mt-6 border-t border-navy/15">{planned.map(([title, status, description]) => <StatusRow key={title} title={title} status={status} description={description} />)}</div></div>
     </div></Container></section>
     <section className="border-t border-navy/10 bg-cream py-16 sm:py-20"><Container><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24"><SectionHeading eyebrow="Public record" title="Organizational milestones, published carefully." /><div className="border-t border-navy/15">{rows.map(([title, status, description]) => <StatusRow key={title} title={title} status={status} description={description} />)}</div></div></Container></section>
-    <section className="bg-olive py-20 text-cream sm:py-28"><Container><div className="max-w-3xl"><SectionHeading light eyebrow="Our standard" title="Do not overstate what is not yet true." /><p className="mt-7 text-lg leading-8 text-cream/75">We will not fabricate nonprofit status, partnerships, grants, sponsors, residents, properties, donations, statistics, endorsements, or success stories. Donations are not tax-deductible at this time. Transparency is not a future feature; it is the foundation.</p></div></Container></section>
+    <section className="bg-olive py-20 text-cream sm:py-28"><Container><div className="max-w-3xl"><SectionHeading light eyebrow="Our standard" title="Do not overstate what is not yet true." /><p className="mt-7 text-lg leading-8 text-cream/75">We will not fabricate partnerships, grants, sponsors, residents, properties, donations, statistics, endorsements, or success stories. Shepherds Not Sheep is an IRS-approved 501(c)(3) nonprofit, and donations are tax-deductible to the extent allowed by law. Transparency is not a future feature; it is the foundation.</p></div></Container></section>
   </>
 }

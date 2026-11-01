@@ -24,7 +24,7 @@ export function SiteFooter() {
               <img src="/images/sns-logo-footer.png" alt="Shepherds Not Sheep" className="h-20 w-64 shrink-0 object-contain object-left" />
             </div>
             <p className="max-w-sm text-lg font-medium leading-relaxed text-cream/90">Helping homeless and distressed veterans rebuild stable, independent lives.</p>
-            <p className="mt-5 text-sm leading-7 text-cream/55">Programs are in development. Organization in formation.</p>
+            <p className="mt-5 text-sm leading-7 text-cream/55">A 501(c)(3) nonprofit organization. Programs are in development.</p>
             {contactEmail ? (
               <a href={`mailto:${contactEmail}`} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cream underline decoration-red underline-offset-4 transition-colors hover:text-cream/75">
                 {contactEmail}
