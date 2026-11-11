@@ -1,58 +1,86 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { programs } from '@/lib/programs'
 
 const navigation = [
-  { label: 'Programs', href: '/programs' },
-  { label: 'Our Story', href: '/our-story' },
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about', children: [
+    { label: 'About the organization', href: '/about' },
+    { label: 'Our Story', href: '/our-story' },
+    { label: 'Mission & Values', href: '/our-mission' },
+    { label: 'Leadership', href: '/leadership' },
+    { label: 'Transparency', href: '/transparency' },
+  ] },
+  { label: 'Our Programs', href: '/programs', children: [
+    { label: 'All planned programs', href: '/programs' },
+    ...programs.map((program) => ({ label: program.title, href: `/programs/${program.slug}` })),
+  ] },
+  { label: 'Veteran Resources', href: '/veteran-resources' },
   { label: 'Get Involved', href: '/get-involved' },
-  { label: 'Transparency', href: '/transparency' },
-  { label: 'Donate', href: '/donate' },
+  { label: 'News & Updates', href: '/news' },
   { label: 'Contact', href: '/contact' },
 ]
 
 export function SiteHeader() {
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
+  const header = useRef<HTMLElement>(null)
 
-  return (
-    <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream/95 backdrop-blur">
-      <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
-        <Link href="/" className="group flex min-w-0 shrink-0 items-center" onClick={() => setOpen(false)}>
-          <img src="/images/sns-logo.png" alt="Shepherds Not Sheep" className="h-14 w-44 shrink-0 object-contain object-center sm:h-[4.5rem] sm:w-72" />
-        </Link>
+  function closeMenus() {
+    setOpen(false)
+    header.current?.querySelectorAll('details[open]').forEach((element) => element.removeAttribute('open'))
+  }
 
-        <nav className="hidden items-center gap-5 2xl:flex" aria-label="Main navigation">
-          {navigation.map((item) => (
-            <Link key={item.href} href={item.href} className="text-[11px] font-semibold uppercase tracking-[0.11em] text-charcoal transition-colors hover:text-olive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-olive focus-visible:ring-offset-4">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+  function isCurrent(href: string) {
+    return pathname === href
+  }
 
-        <div className="flex items-center gap-3">
-          <Button render={<a href="/veteran-assistance" />} nativeButton={false} className="bg-red px-3 text-cream hover:bg-red/90 sm:px-4" size="sm">Get Help</Button>
-          <Button type="button" variant="outline" size="icon" className="border-navy/20 text-navy 2xl:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((current) => !current)}>
-            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-          </Button>
-        </div>
+  return <header ref={header} className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md" onKeyDown={(event) => {
+    if (event.key !== 'Escape') return
+    const disclosure = (event.target as HTMLElement).closest('details')
+    if (disclosure?.open) {
+      disclosure.open = false
+      disclosure.querySelector('summary')?.focus()
+    } else if (open) {
+      closeMenus()
+      menuButton.current?.focus()
+    }
+  }}>
+    <div className="mx-auto flex min-h-24 max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8">
+      <Link href="/" onClick={closeMenus} className="shrink-0" aria-label="Shepherds Not Sheep home">
+        <Image src="/images/sns-logo.png" alt="Shepherds Not Sheep" width={288} height={90} priority sizes="(min-width: 640px) 200px, 152px" className="h-16 w-28 object-contain sm:w-44" />
+      </Link>
+      <nav aria-label="Main navigation" className="hidden items-center gap-4 xl:flex">
+        {navigation.map((item) => item.children ? <details key={item.href} className="group relative" onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false
+        }}>
+          <summary className="flex min-h-12 list-none items-center gap-1 text-[13px] font-semibold text-foreground hover:text-olive [&::-webkit-details-marker]:hidden">{item.label}<ChevronDown className="size-3.5 transition-transform group-open:rotate-180" aria-hidden="true" /></summary>
+          <div className="absolute left-0 top-full min-w-64 rounded-sm border border-border bg-popover p-2 shadow-xl">
+            {item.children.map((child) => <Link key={child.href} href={child.href} onClick={closeMenus} aria-current={isCurrent(child.href) ? 'page' : undefined} className="flex min-h-11 items-center rounded-sm px-3 py-2 text-sm text-foreground hover:bg-muted aria-[current=page]:bg-muted">{child.label}</Link>)}
+          </div>
+        </details> : <Link key={item.href} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} className="flex min-h-12 items-center text-[13px] font-semibold text-foreground underline-offset-8 hover:underline aria-[current=page]:underline">{item.label}</Link>)}
+      </nav>
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <Link href="/donate" onClick={closeMenus} className="hidden min-h-11 items-center justify-center rounded-sm border border-primary px-4 text-sm font-semibold text-primary min-[360px]:inline-flex">Donate</Link>
+        <Link href="/veteran-assistance" onClick={closeMenus} className="inline-flex min-h-11 items-center justify-center rounded-sm bg-primary px-3 text-sm font-semibold text-primary-foreground sm:px-4">Get Help</Link>
+        <Button ref={menuButton} type="button" variant="outline" size="icon-lg" className="size-11 xl:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>{open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</Button>
       </div>
-
-      {open && (
-        <div id="mobile-navigation" className="absolute inset-x-0 top-full z-50 max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-navy/10 bg-cream px-5 py-5 shadow-[0_18px_36px_rgba(23,41,54,0.12)] sm:px-8 2xl:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1" aria-label="Mobile navigation">
-            {navigation.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setOpen(false)} className="border-b border-navy/10 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-navy last:border-0">
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
-  )
+    </div>
+    <nav id="mobile-navigation" aria-label="Mobile navigation" hidden={!open} className="max-h-[75dvh] overflow-y-auto border-t border-border bg-background px-5 py-4 xl:hidden">
+      {navigation.map((item) => <div key={item.href} className="border-b border-border">
+        <Link href={item.href} onClick={closeMenus} aria-current={isCurrent(item.href) ? 'page' : undefined} className="flex min-h-12 items-center py-3 font-semibold text-foreground aria-[current=page]:underline">{item.label}</Link>
+        {item.children && <div className="flex flex-col border-l border-border pl-4">{item.children.map((child) => <Link key={child.href} href={child.href} onClick={closeMenus} aria-current={isCurrent(child.href) ? 'page' : undefined} className="py-3 text-sm text-muted-foreground aria-[current=page]:underline">{child.label}</Link>)}</div>}
+      </div>)}
+      <Link href="/donate" onClick={closeMenus} className="mt-4 flex min-h-12 items-center justify-center bg-primary px-5 font-semibold text-primary-foreground">Support Our Mission</Link>
+    </nav>
+  </header>
 }
 
 export { navigation }

@@ -30,6 +30,16 @@ export function SiteFooter() {
                 {contactEmail}
               </a>
             ) : null}
+            <a
+              href="https://facebook.com/profile.php?id=61595803334794"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit Shepherds Not Sheep on Facebook"
+              className="mt-6 inline-flex items-center gap-3 text-sm font-semibold text-cream/80 transition-colors hover:text-cream"
+            >
+              <img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/facebook/default.svg" alt="" aria-hidden="true" className="h-6 w-6" />
+              Facebook
+            </a>
           </div>
           <div>
             <p className="eyebrow text-cream/45">Explore</p>

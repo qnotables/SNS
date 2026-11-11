@@ -2,14 +2,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
 import { ArrowRight, BriefcaseBusiness, Camera, GraduationCap, Home, Scale, UsersRound, Wrench } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { programs } from '@/lib/programs'
+import { cn } from '@/lib/utils'
 
 export function Container({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return <div className={`mx-auto w-full max-w-7xl px-5 sm:px-8 ${className}`}>{children}</div>
 }
 
 export function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  return <p className={`eyebrow ${light ? 'text-cream/55' : 'text-olive'}`}>{children}</p>
+  return <p className={`eyebrow ${light ? 'text-cream/80' : 'text-olive'}`}>{children}</p>
 }
 
 export function SectionHeading({ eyebrow, title, children, light = false, align = 'left' }: { eyebrow?: string; title: string; children?: React.ReactNode; light?: boolean; align?: 'left' | 'center' }) {
@@ -35,24 +38,18 @@ export function PhotoBand({ src, alt, eyebrow, title, description, dark = false 
 }
 
 export function ButtonLink({ href, children, variant = 'default', className = '' }: { href: string; children: React.ReactNode; variant?: 'default' | 'outline' | 'light'; className?: string }) {
-  return <Button render={<Link href={href} />} nativeButton={false} variant={variant === 'light' ? 'secondary' : variant} className={`${variant === 'default' ? 'bg-navy text-cream hover:bg-navy/90' : ''} ${variant === 'light' ? 'bg-cream text-navy hover:bg-cream/90' : ''} ${className}`} size="lg">{children}<ArrowRight data-icon="inline-end" aria-hidden="true" /></Button>
+  return <Link href={href} className={cn(buttonVariants({ variant: variant === 'light' ? 'secondary' : variant, size: 'lg' }), 'whitespace-normal text-center', className)}>{children}<ArrowRight data-icon="inline-end" aria-hidden="true" /></Link>
 }
 
 export function Callout({ eyebrow, title, description, href, label, dark = true }: { eyebrow: string; title: string; description: string; href: string; label: string; dark?: boolean }) {
   return <section className={dark ? 'bg-navy text-cream' : 'bg-olive text-cream'}><Container className="flex flex-col gap-8 py-16 sm:py-20 lg:flex-row lg:items-end lg:justify-between"><div className="max-w-2xl"><Eyebrow light>{eyebrow}</Eyebrow><h2 className="mt-4 text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">{title}</h2><p className="mt-4 text-base leading-8 text-cream/70">{description}</p></div><ButtonLink href={href} variant="light" className="self-start lg:self-auto">{label}</ButtonLink></Container></section>
 }
 
-export const pillars: { title: string; description: string; icon: LucideIcon }[] = [
-  { title: 'Stability', description: 'Housing, food, transportation, basic necessities, and a stable environment where veterans can begin rebuilding.', icon: Home },
-  { title: 'Veteran Advocacy', description: 'Helping veterans identify and navigate VA benefits, government programs, nonprofit resources, and community services.', icon: Scale },
-  { title: 'Education & Employment', description: 'College opportunities, certifications, vocational training, technology skills, resume assistance, job preparation, and career development.', icon: GraduationCap },
-  { title: 'Entrepreneurship', description: 'Business education, financial literacy, sales, online commerce, mentorship, and small-business development.', icon: BriefcaseBusiness },
-  { title: 'Skills & Self-Sufficiency', description: 'Hands-on opportunities involving woodworking, CNC operation, construction, gardening, sustainable agriculture, property maintenance, animal husbandry, and practical life skills.', icon: Wrench },
-  { title: 'Community & Purpose', description: 'Veteran mentorship, peer support, community projects, recreation, volunteering, and opportunities to rebuild a sense of mission and belonging.', icon: UsersRound },
-]
+const programIcons = [Home, Scale, GraduationCap, BriefcaseBusiness, Wrench, UsersRound]
+export const pillars = programs.map((program, index) => ({ ...program, icon: programIcons[index] }))
 
-export function PillarCard({ title, description, icon: Icon }: { title: string; description: string; icon: LucideIcon }) {
-  return <article className="group flex min-h-[280px] flex-col justify-between border border-navy/15 border-t-4 border-t-olive bg-cream p-6 shadow-[0_12px_32px_rgba(23,41,54,0.06)] transition-[border-color,background-color,transform] hover:-translate-y-1 hover:border-navy/30 hover:bg-[#faf8f3] sm:p-7"><div className="flex items-start justify-between gap-5"><span className="flex size-12 items-center justify-center rounded-sm border border-olive/30 bg-olive/10 text-olive"><Icon aria-hidden="true" /></span><span className="eyebrow text-charcoal/35">Planned</span></div><div><h3 className="mt-10 text-2xl font-semibold text-navy">{title}</h3><p className="mt-3 text-sm leading-7 text-charcoal/65">{description}</p></div></article>
+export function PillarCard({ title, description, slug, icon: Icon }: { title: string; description: string; slug: string; icon: LucideIcon }) {
+  return <article className="group flex min-h-64 flex-col justify-between gap-8 rounded-sm border border-border bg-card p-6 transition-colors hover:border-olive sm:p-8"><div className="flex items-center justify-between gap-4"><Icon className="size-7 text-olive" aria-hidden="true" /><Badge variant="secondary">In development</Badge></div><div><h3 className="text-2xl leading-tight tracking-tight text-navy"><Link href={`/programs/${slug}`} className="underline-offset-4 hover:underline">{title}</Link></h3><p className="mt-3 text-base leading-7 text-muted-foreground">{description}</p></div><Link href={`/programs/${slug}`} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-olive">Explore the plan<span className="sr-only"> for {title}</span><ArrowRight className="size-4" aria-hidden="true" /></Link></article>
 }
 
 export function ProcessSteps() {
