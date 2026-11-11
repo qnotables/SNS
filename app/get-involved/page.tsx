@@ -51,7 +51,7 @@ export default function GetInvolvedPage() {
             </div>
 
             <div className="rounded-sm border border-navy/15 bg-white p-6 shadow-[0_16px_40px_rgba(23,41,54,0.07)] sm:p-8 lg:sticky lg:top-28 lg:self-start">
-              <h2 className="text-2xl font-semibold tracking-[-0.02em] text-navy">Tell us how you can help</h2>
+              <h2 id="involvement-form" className="text-2xl font-semibold tracking-[-0.02em] text-navy">Tell us how you can help</h2>
               <p className="mt-2 text-sm leading-7 text-charcoal/60">{'We read messages within 2 business days.'}</p>
               <div className="mt-7">
                 <InvolveForm />

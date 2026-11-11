@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Container, PageHero } from '@/components/site-sections'
+import { pageMetadata } from '@/lib/seo'
 
-export const legalLastUpdated = 'September 15, 2026'
+export const legalLastUpdated = 'November 10, 2026'
 
 export type LegalSection = {
   title: string
@@ -10,13 +11,14 @@ export type LegalSection = {
 }
 
 export function createLegalMetadata(title: string, description: string): Metadata {
-  return { title, description }
+  const paths: Record<string, string> = { 'Privacy Policy': '/privacy', 'Terms of Use': '/terms', 'Accessibility Statement': '/accessibility', 'Donation and Refund Policy': '/donation-policy' }
+  return pageMetadata(title, description, paths[title] || '/')
 }
 
 export function LegalPage({ eyebrow, title, description, notice, sections, children }: { eyebrow: string; title: string; description: string; notice?: string; sections: LegalSection[]; children?: ReactNode }) {
   return <>
     <PageHero eyebrow={eyebrow} title={title} description={description} accent="navy" />
-    <main className="bg-cream py-16 sm:py-24">
+    <div className="bg-cream py-16 sm:py-24">
       <Container>
         <div className="mx-auto max-w-4xl">
           <div className="flex flex-col gap-3 border-b border-navy/15 pb-6 sm:flex-row sm:items-center sm:justify-between">
@@ -30,7 +32,7 @@ export function LegalPage({ eyebrow, title, description, notice, sections, child
           {children}
         </div>
       </Container>
-    </main>
+    </div>
   </>
 }
 
